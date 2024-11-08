@@ -1,0 +1,13 @@
+2024-11-09 00:00:59,866 [INFO] USER:somasani_chidvila s3_resource.py:40:validate_bucket_name LOG: Starting validating bucket name 'syndicate-education-platform-custom-sandbox-artifacts-sbox01'
+2024-11-09 00:00:59,866 [INFO] USER:somasani_chidvila s3_resource.py:73:validate_bucket_name LOG: Finished validating bucket name 'syndicate-education-platform-custom-sandbox-artifacts-sbox01'
+2024-11-09 00:00:59,866 [INFO] USER:somasani_chidvila helper.py:514:convert LOG: Stripping course_id:SEP_JAP_4,course_type:stm,student_id:5f06f25d,type:student from "," a bit..
+2024-11-09 00:00:59,866 [INFO] USER:somasani_chidvila helper.py:518:convert LOG: Converting: course_id:SEP_JAP_4,course_type:stm,student_id:5f06f25d,type:student to dict..
+2024-11-09 00:00:59,869 [INFO] USER:somasani_chidvila helper.py:530:convert LOG: Converted to such a dict: {'course_id': 'SEP_JAP_4', 'course_type': 'stm', 'student_id': '5f06f25d', 'type': 'student'}
+2024-11-09 00:01:01,827 [WARNING] USER:somasani_chidvila generator.py:76:generate_configuration_files LOG: The config_path property is not specified. The working directory is used
+2024-11-09 00:01:01,829 [ERROR] USER:somasani_chidvila __init__.py:44:_mkdir LOG: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\somasani_chidvila\\Documents\\AWS_Tasks\\SyndicateTasks_updated\\task03\\.syndicate-config-dev'
+2024-11-09 00:01:01,832 [WARNING] USER:somasani_chidvila generator.py:93:generate_configuration_files LOG: The "project_path" property is not specified. The working directory will be used as a project path. To change the path, edit the syndicate.yml by path C:\Users\somasani_chidvila\Documents\AWS_Tasks\SyndicateTasks_updated\task03\.syndicate-config-dev
+2024-11-09 00:01:01,850 [INFO] USER:somasani_chidvila generator.py:155:generate_configuration_files LOG: Syndicate initialization has been completed. 
+Set SDCT_CONF:
+Unix: export SDCT_CONF="C:\Users\somasani_chidvila\Documents\AWS_Tasks\SyndicateTasks_updated\task03\.syndicate-config-dev"
+Windows: setx SDCT_CONF C:\Users\somasani_chidvila\Documents\AWS_Tasks\SyndicateTasks_updated\task03\.syndicate-config-dev
+2024-11-09 00:01:01,858 [INFO] USER:somasani_chidvila helper.py:328:timed LOG: Stage config, elapsed time: 0:00:01.988666
