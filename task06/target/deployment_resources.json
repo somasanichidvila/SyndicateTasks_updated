@@ -25,7 +25,8 @@
     "env_variables" : {
       "target_table" : "${target_table}"
     },
-    "publish_version" : false,
+    "publish_version" : true,
+    "alias" : "learn",
     "logs_expiration" : "${logs_expiration}",
     "snap_start" : "None"
   }
