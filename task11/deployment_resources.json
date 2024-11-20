@@ -71,11 +71,9 @@
     "username_attributes": [
       "email"
     ],
-    "custom_attributes": [
-
-    ],
+    "custom_attributes": [],
     "client": {
-      "client_name" : "api_client_syndicate"
+      "client_name": "api_client_syndicate"
     }
   },
   "Tables": {
@@ -96,177 +94,37 @@
     "global_indexes": [],
     "autoscaling": []
   },
-  "task11_api": {
-    "resource_type": "api_gateway",
-    "deploy_stage": "api",
-    "authorizers": {
-      "authorizer": {
-        "type": "COGNITO_USER_POOLS",
-        "identity_source": "method.request.header.Authorization",
-        "user_pools": [
-          "simple-booking-userpool"
-        ],
-        "ttl": 300
-      }
+  "api-ui-hoster": {
+    "resource_type": "s3_bucket",
+    "acl": "public-read",
+    "cors": [],
+    "policy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicReadGetObject",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": [
+            "s3:GetObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::api-ui-hoster/*"
+          ]
+        }
+      ]
     },
-    "dependencies": [],
-    "resources": {
-      "/signup": {
-        "enable_cors": false,
-        "POST": {
-          "authorization_type": "NONE",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))\n$input.path('$.body')\n#if($inputRoot.toString().contains(\"ERROR\"))\n    #set($context.responseOverride.status = 400)\n#end"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        }
-      },
-      "/signin": {
-        "enable_cors": false,
-        "POST": {
-          "authorization_type": "NONE",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))\n{\"accessToken\": \"$input.path('$.body')\"\n#if($inputRoot.toString().contains('ERROR'))\n    #set($context.responseOverride.status = 400)\n#end}"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        }
-      },
-      "/tables/{id}": {
-        "enable_cors": false,
-        "GET": {
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('id')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))\n$input.path('$.body')\n#if($inputRoot.toString().contains(\"ERROR\"))\n    #set($context.responseOverride.status = 400)\n#end"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        }
-      },
-      "/tables": {
-        "enable_cors": false,
-        "GET": {
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))$input.path('$.body')#if($inputRoot.toString().contains(\"ERROR\"))\n    #set($context.responseOverride.status = 400)\n#end"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        },
-        "POST": {
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))\n{\"id\": $input.path('$.body')#if($inputRoot.toString().contains('ERROR'))\n    #set($context.responseOverride.status = 400)\n#end}"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        }
-      },
-      "/reservations": {
-        "enable_cors": false,
-        "GET": {
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$'))$input.path('$.body')#if($inputRoot.toString().contains(\"ERROR\"))\n    #set($context.responseOverride.status = 400)\n#end"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        },
-        "POST": {
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {
-            "application/json": "{\"method\": \"$context.httpMethod\", \"path\": \"$context.resourcePath\", \"authorization_header\": \"$input.params('Authorization')\", \"body_json\": $input.json('$')}"
-          },
-          "responses": [],
-          "integration_responses": [
-            {
-              "status_code": "200",
-              "response_templates": {
-                "application/json": "#set($inputRoot = $input.path('$')){\"reservationId\": \"$input.path('$.body')\"#if($inputRoot.toString().contains('ERROR'))\n    #set($context.responseOverride.status = 400)\n#end}"
-              }
-            }
-          ],
-          "default_error_pattern": true
-        }
-      }
+    "public_access_block": {
+      "block_public_acls": false,
+      "ignore_public_acls": false,
+      "block_public_policy": false,
+      "restrict_public_buckets": false
     },
-    "minimum_compression_size": 0
+    "tags": {},
+    "website_hosting": {
+      "enabled": true,
+      "index_document": "index.html",
+      "error_document": "error.html"
+    }
   }
 }
