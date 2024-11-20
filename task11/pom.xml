@@ -10,7 +10,7 @@
 
     <properties>
         <maven-shade-plugin.version>3.5.2</maven-shade-plugin.version>
-        <syndicate.java.plugin.version>1.13.0</syndicate.java.plugin.version>
+        <syndicate.java.plugin.version>1.14.0</syndicate.java.plugin.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,14 +80,13 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <sourceDirectory>${src.dir}</sourceDirectory>
         <resources>
             <resource>
                 <directory>${resources.dir}</directory>
             </resource>
-        </resources>
+        </resources>        
         <plugins>
             <plugin>
                 <groupId>net.sf.aws-syndicate</groupId>
